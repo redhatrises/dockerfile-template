@@ -13,13 +13,14 @@ import (
 )
 
 type generateOptions struct {
-	File             string
-	Image            string
-	Name             string
-	Print            bool
-	Tag              string
-	Template         string
-	OverrideFilename string
+	File                string
+	Image               string
+	Name                string
+	Print               bool
+	Tag                 string
+	Template            string
+	OverrideFilename    string
+	OverrideFilenameTag bool
 }
 
 var (
@@ -50,6 +51,7 @@ func generateFlags(cmd *cobra.Command) {
 	flags.BoolVarP(&opts.Print, "print", "p", false, "output generated template to stdout")
 	flags.StringVar(&opts.Template, "template", "", "`pathname or URL` of a Dockerfile.template")
 	flags.StringVar(&opts.OverrideFilename, "override-filename", "", "override the auto-generated filename")
+	flags.BoolVar(&opts.OverrideFilenameTag, "override-filename-tag", false, "drop the auto-generated filename tag")
 }
 
 func generateTemplates(cmd *cobra.Command, args []string, opts generateOptions) error {
@@ -87,7 +89,7 @@ func generateTemplates(cmd *cobra.Command, args []string, opts generateOptions) 
 		containerInfo.MinorVersion = version.Minor
 	}
 
-	filename := api.Filename(containerInfo)
+	filename := api.Filename(containerInfo, opts.OverrideFilenameTag)
 	if opts.OverrideFilename != "" {
 		filename = opts.OverrideFilename
 	}

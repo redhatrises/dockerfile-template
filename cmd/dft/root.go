@@ -37,7 +37,7 @@ Options:
 var (
 	rootCmd = &cobra.Command{
 		Use:                   "dft",
-		Short:                 "dft - Creating Dockerfiles using Go templating",
+		Short:                 "dft - Create Dockerfiles using Go templating",
 		Long:                  `A tool to create multiple Dockerfiles using Go-style templating`,
 		SilenceUsage:          false,
 		SilenceErrors:         true,

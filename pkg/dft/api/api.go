@@ -10,13 +10,16 @@ type Container struct {
 	MinorVersion uint64
 }
 
-func Filename(c Container) string {
+func Filename(c Container, removeTag bool) string {
 	filename := "Dockerfile"
 	if c.Name != "" {
-		filename = fmt.Sprintf("%s.%s", filename, c.Name)
+		return fmt.Sprintf("%s.%s", filename, c.Name)
 	}
 	if c.Tag != "" {
-		filename = fmt.Sprintf("%s%d", filename, c.MajorVersion)
+		return fmt.Sprintf("%s%d", filename, c.MajorVersion)
+	}
+	if removeTag {
+		return fmt.Sprintf("%s.%s", filename, c.Name)
 	}
 	return filename
 }
