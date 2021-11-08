@@ -53,7 +53,6 @@ func generateFlags(cmd *cobra.Command) {
 }
 
 func generateTemplates(cmd *cobra.Command, args []string, opts generateOptions) error {
-
 	if len(args) < 1 {
 		return errors.Errorf("unknown image: missing '<image>[:<tag>]' or '<image>'")
 	}
